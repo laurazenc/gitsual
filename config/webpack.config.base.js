@@ -7,7 +7,11 @@ import webpack from 'webpack';
 import { dependencies } from '../package.json';
 
 export default {
-  externals: [...Object.keys(dependencies || {})],
+  externals: [...Object.keys(dependencies || {}), function(context, request, callback) {
+    if(/^nodegit/.test(request))
+      return callback(null, 'commonjs' + " " + request);
+    callback();
+  }],
 
   module: {
     rules: [

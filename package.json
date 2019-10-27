@@ -9,7 +9,8 @@
     "start-main-dev": "cross-env HOT=1 NODE_ENV=development electron -r @babel/register ./app/main.dev.js",
     "start-renderer-dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.renderer.dev.babel.js",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./config/webpack.config.renderer.dev.dll.babel.js --colors",
-    "preinstall": "node ./bin/CheckYarn.js"
+    "preinstall": "node ./bin/CheckYarn.js",
+    "lint": "yarn lint --fix"
   },
   "repository": {
     "type": "git",
@@ -129,6 +130,8 @@
     "electron-log": "^3.0.4",
     "electron-updater": "^4.0.6",
     "history": "^4.9.0",
+    "lowdb": "^1.0.0",
+    "nodegit": "^0.26.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.8.2",
@@ -141,7 +144,6 @@
   },
   "browserslist": "electron 1.6",
   "devEngines": {
-    "node": ">=7.x",
     "npm": ">=4.x",
     "yarn": ">=0.21.3"
   },
