@@ -1,5 +1,7 @@
 node_modules/
 
+.gitsual
+
 # App packaged
 release
 app/main.prod.js

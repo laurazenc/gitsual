@@ -1,0 +1,19 @@
+{
+    "extends": [
+        "erb",
+        "prettier"
+      ],
+    "settings": {
+      "import/resolver": {
+        "webpack": {
+          "config": "configs/webpack.config.eslint.js"
+        }
+      }
+    },
+    "rules": {
+      "react/button-has-type": "off",
+      "react/require-default-props": "off",
+      "react/forbid-prop-types": "off",
+      "no-restricted-syntax": "off"
+    }
+  }

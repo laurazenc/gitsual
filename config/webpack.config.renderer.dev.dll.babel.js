@@ -17,13 +17,9 @@ const dist = path.join(__dirname, '..', 'dll');
 
 export default merge.smart(baseConfig, {
   context: path.join(__dirname, '..'),
-
   devtool: 'eval',
-
   mode: 'development',
-
   target: 'electron-renderer',
-
   externals: ['fsevents', 'crypto-browserify'],
 
   /**
@@ -38,7 +34,7 @@ export default merge.smart(baseConfig, {
   output: {
     library: 'renderer',
     path: dist,
-    filename: '[name].dll.js',
+    filename: '[name].dev.dll.js',
     libraryTarget: 'var'
   },
 
