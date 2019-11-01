@@ -4,6 +4,8 @@ import { AppContainer as ReactHotAppContainer } from 'react-hot-loader';
 import Root from './pages/Root';
 import { configureStore, history } from './store';
 
+import './pages.css';
+
 const store = configureStore();
 
 const AppContainer = process.env.PLAIN_HMR ? Fragment : ReactHotAppContainer;

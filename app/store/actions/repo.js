@@ -1,20 +1,20 @@
-import { remote } from 'electron'
-import low from 'lowdb'
-import nodegit from 'nodegit'
-import { join } from 'path'
-import { DB_PATH } from '../../constants'
+import low from 'lowdb';
+import nodegit from 'nodegit';
+import { DB_PATH } from '../../constants';
 
-import * as Helper from '../../lib/helpers'
+import {
+  LOAD_REPO,
+  LOAD_REPO_FAIL,
+  INIT_SIDEBAR,
+  INIT_SIDEBAR_FAIL
+} from './index';
 
+const FileASync = require('lowdb/adapters/FileASync'); // eslint-disable-line
 
-import { LOAD_REPO, LOAD_REPO_FAIL, INIT_SIDEBAR, INIT_SIDEBAR_FAIL } from './index'
-const FileASync = require('lowdb/adapters/FileASync')
+const adapter = new FileASync(DB_PATH);
+const db = low(adapter);
 
-const adapter = new FileASync(DB_PATH)
-const db = low(adapter)
-
-const BrowserWindow = remote.BrowserWindow
-const { Repository, Diff, Reference } = nodegit
+const { Repository, Diff } = nodegit;
 
 export const loadRepo = projectName => {
   return async dispatch => {
@@ -32,10 +32,11 @@ export const loadRepo = projectName => {
     Repository.open(dirPath)
       .then(repo => {
         console.log('openening', repo);
+
         dispatch({
           type: LOAD_REPO,
           repo,
-          projectName: projectName
+          projectName
         });
       })
       .catch(e => {
@@ -55,7 +56,7 @@ export const initSideBar = repo => {
       const tree = await commit.getTree();
       const diff = await Diff.treeToWorkdirWithIndex(repo, tree, {
         flags:
-          Diff.OPTION.SHOW_UNTRACKED_CONTENT |
+          Diff.OPTION.SHOW_UNTRACKED_CONTENT ||
           Diff.OPTION.RECURSE_UNTRACKED_DIRS
       });
       const arrayConvenientPatch = await diff.patches();
@@ -78,6 +79,7 @@ export const initSideBar = repo => {
       //   return repo.getSubmoduleNames()
       // }).then((submodules) => {
       //   data.submodules = submodules
+      data.currentBranch = await repo.getCurrentBranch();
       dispatch({
         type: INIT_SIDEBAR,
         ...data

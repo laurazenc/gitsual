@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { findProject, listProject } from '../store/actions/project';
 
+const ProjectList = styled.ul``;
+const ProjectItem = styled.li``;
+
 const Home = ({ projects, actions }) => {
-  console.log(actions);
   useEffect(() => {
     const getProjects = async () => {
       await actions.listProject();
@@ -24,13 +27,15 @@ const Home = ({ projects, actions }) => {
       Home
       <button onClick={() => retrieveProject()}>Find project</button>
       <div>Current repos:</div>
-      {projects.map(project => {
-        return (
-          <Link key={project.name} to={`/repo/${project.name}`}>
-            {project.name}
-          </Link>
-        );
-      })}
+      <ProjectList>
+        {projects.map(project => {
+          return (
+            <ProjectItem key={project.name}>
+              <Link to={`/repo/${project.name}`}>{project.name}</Link>
+            </ProjectItem>
+          );
+        })}
+      </ProjectList>
     </div>
   );
 };
