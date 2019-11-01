@@ -21,6 +21,7 @@
       "array-callback-return": "off",
       "no-param-reassign": "off",
       "no-bitwise": "off",
-      "no-underscore-dangle": "off"
+      "no-underscore-dangle": "off",
+      "flowtype/no-weak-types": "off"
     }
   }

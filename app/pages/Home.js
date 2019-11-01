@@ -1,3 +1,4 @@
+// @flow
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -10,7 +11,12 @@ import { findProject, listProject } from '../store/actions/project';
 const ProjectList = styled.ul``;
 const ProjectItem = styled.li``;
 
-const Home = ({ projects, actions }) => {
+type Props = {
+  projects: Array,
+  actions: any
+};
+
+const Home = ({ projects, actions }: Props) => {
   useEffect(() => {
     const getProjects = async () => {
       await actions.listProject();
@@ -25,7 +31,7 @@ const Home = ({ projects, actions }) => {
   return (
     <div>
       Home
-      <button onClick={() => retrieveProject()}>Find project</button>
+      <button onClick={() => retrieveProject()}>Open project</button>
       <div>Current repos:</div>
       <ProjectList>
         {projects.map(project => {
@@ -45,10 +51,8 @@ Home.propTypes = {
   actions: PropTypes.object
 };
 
-const mapStateToProps = ({ project, repo }) => ({
-  projects: project.list,
-  currentRepo: project.repo,
-  repo
+const mapStateToProps = ({ project }) => ({
+  projects: project.list
 });
 
 const mapDispatchToProps = dispatch => ({

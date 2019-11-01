@@ -1,23 +1,21 @@
+// @flow
 import low from 'lowdb';
 import nodegit from 'nodegit';
 import { DB_PATH } from '../../constants';
 
-import {
-  LOAD_REPO,
-  LOAD_REPO_FAIL,
-  INIT_SIDEBAR,
-  INIT_SIDEBAR_FAIL
-} from './index';
+import { LOAD_REPO, LOAD_REPO_FAIL } from './index'; // eslint-disable-line
 
-const FileASync = require('lowdb/adapters/FileASync'); // eslint-disable-line
+import { Dispatch } from '../types';
+
+const FileASync = require('lowdb/adapters/FileASync');
 
 const adapter = new FileASync(DB_PATH);
 const db = low(adapter);
 
 const { Repository, Diff } = nodegit;
 
-export const loadRepo = projectName => {
-  return async dispatch => {
+export const loadRepo = (projectName: string) => {
+  return async (dispatch: Dispatch) => {
     const database = await db;
     const result = database
       .get('projects')
@@ -31,8 +29,6 @@ export const loadRepo = projectName => {
     const dirPath = result.path;
     Repository.open(dirPath)
       .then(repo => {
-        console.log('openening', repo);
-
         dispatch({
           type: LOAD_REPO,
           repo,
