@@ -1,6 +1,6 @@
 import { app, BrowserWindow } from 'electron';
-import * as path from 'path';
-import * as url from 'url';
+import url from 'url';
+import path from 'path';
 
 let win: BrowserWindow | null;
 
@@ -19,7 +19,11 @@ const createWindow = async () => {
         await installExtensions();
     }
 
-    win = new BrowserWindow({ width: 1024, height: 800 });
+    win = new BrowserWindow({
+        show: false,
+        width: 1024,
+        height: 800
+     });
 
     if (process.env.NODE_ENV !== 'production') {
         process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1';
@@ -33,6 +37,20 @@ const createWindow = async () => {
             })
         );
     }
+
+    win.webContents.on('did-finish-load', () => {
+        if (!win) {
+            throw new Error('"win" is not defined');
+        }
+        if (process.env.START_MINIMIZED) {
+            win.minimize();
+        } else {
+            win.show();
+            win.focus();
+        }
+    });
+
+
 
     if (process.env.NODE_ENV !== 'production') {
         // Open DevTools, see https://github.com/electron/electron/issues/12438 for why we wait for dom-ready

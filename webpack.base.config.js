@@ -1,4 +1,5 @@
-'use strict';
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 
 const path = require('path');
 
@@ -17,5 +18,6 @@ module.exports = {
     },
     devtool: 'source-map',
     plugins: [
+       
     ]
 };

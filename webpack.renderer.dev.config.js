@@ -1,6 +1,6 @@
 const merge = require('webpack-merge');
 const spawn = require('child_process').spawn;
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseConfig = require('./webpack.renderer.config');
 
 module.exports = merge.smart(baseConfig, {
@@ -9,6 +9,9 @@ module.exports = merge.smart(baseConfig, {
             'react-dom': '@hot-loader/react-dom'
         }
     },
+    plugins: [
+        new HtmlWebpackPlugin(),
+    ],
     devServer: {
         port: 2003,
         compress: true,

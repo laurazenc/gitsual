@@ -1,4 +1,4 @@
-import react, { Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { render } from 'react-dom';
 import { AppContainer as ReactHotAppContainer } from 'react-hot-loader';
 import Root from './pages/Root';
@@ -11,9 +11,11 @@ const AppContainer = process.env.PLAIN_HMR ? Fragment : ReactHotAppContainer;
 const mainElement = document.createElement('div');
 document.body.appendChild(mainElement);
 
+const root = document.getElementById('root');
+
 render(
     <AppContainer>
         <Root store={store} history={history} />
     </AppContainer>,
-    mainElement
+    process.env.NODE_ENV === 'development' ? mainElement :root
 );

@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 
 
 const baseConfig = require('./webpack.base.config');
@@ -35,10 +34,7 @@ module.exports = merge.smart(baseConfig, {
             }
         ]
     },
-    plugins: [
-        new CopyPlugin([
-            { from: 'src/main/index.html', to: path.resolve(__dirname, 'dist') },
-        ]),
+    plugins: [        
         new ForkTsCheckerWebpackPlugin({
             reportFiles: ['src/main/**/*']
         }),

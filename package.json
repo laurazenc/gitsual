@@ -19,22 +19,7 @@
     "pack": "npm run build && electron-builder --dir",
     "dist": "npm run build && electron-builder",
     "postinstall": "electron-builder install-app-deps"
-  },
-  "husky": {
-    "hooks": {
-      
-    }
-  },
-  "lint-staged": {
-    "{src,test,mocks}/**/*.{js,ts,tsx,json,css,scss,md}": [
-      "prettier --config ./.prettierrc --write",
-      "git add"
-    ],
-    "{src,test,mocks}/**/*.{js,ts,tsx}": [
-      "tslint --project ./tsconfig.json --fix",
-      "git add"
-    ]
-  },
+  }, 
   "jest": {
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
@@ -62,6 +47,8 @@
       "output": "release"
     },
     "files": [
+      "src/index.html",
+      "dist/index.html",
       "dist/",
       "node_modules/",
       "package.json"
@@ -104,6 +91,7 @@
     "@types/webdriverio": "^4.8.7",
     "@types/webpack-env": "^1.13.3",
     "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.5",
     "cross-env": "^5.1.3",
     "css-loader": "^2.1.1",

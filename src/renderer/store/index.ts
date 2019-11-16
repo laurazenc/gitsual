@@ -2,7 +2,7 @@ import storeDev from './store.dev';
 import storeProd from './store.prod';
 
 const selectedConfigureStore =
-    process.env.NODE_ENV === 'production' ? configureStoreProd : configureStoreDev;
+    process.env.NODE_ENV === 'production' ? storeProd : storeDev;
 
 export const { configureStore } = selectedConfigureStore;
 
