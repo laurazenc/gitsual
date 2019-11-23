@@ -1,12 +1,21 @@
-import { combineReducers } from 'redux';
-import { connectRouter } from 'connected-react-router';
+import { combineReducers } from 'redux'
+import { connectRouter } from 'connected-react-router'
+
+import themeReducer from './theme'
 
 export interface RootState {
-    router: any;
+	router: any,
+	theme: any
 }
 
-export default function createRootReducer(history) {
-    return combineReducers<RootState | undefined>({
-        router: connectRouter(history)
-    });
+const createRootReducer = (history: any) => {
+	return combineReducers<RootState | undefined>({
+		router: connectRouter(history),
+		theme: themeReducer
+	})
 }
+
+export default createRootReducer
+
+export type AppState = ReturnType<typeof createRootReducer>
+
