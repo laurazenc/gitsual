@@ -1,0 +1,56 @@
+{
+    "extends": [        
+        "tslint-react",
+        "tslint-config-prettier"
+    ],
+    "jsRules": {},
+    "rules": {
+        "max-line-length": [
+            true,
+            {
+                "limit": 120
+            }
+        ],
+        
+        "indent": [
+            true,
+            "tabs",
+            4
+        ],
+        "trailing-comma": [true, {
+            "singleline": "never",
+            "multiline": "never"
+        }],
+        "ter-indent": [
+            true,
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "variable-name": false,
+        "jsx-alignment": true,
+        "jsx-equals-spacing": [true, "never"],
+        "jsx-no-string-ref": true,
+        "jsx-self-close": true,
+        "quotemark": [
+            true,
+            "single",
+            "jsx-double",
+            "avoid-escape"
+        ],
+        "semicolon": [
+            true,
+            "never"
+        ],
+        "member-access": [
+            false
+        ],
+        "member-ordering": [
+            false
+        ]
+    },
+    "rulesDirectory": [
+        "tslint-plugin-prettier"
+    ]
+}
