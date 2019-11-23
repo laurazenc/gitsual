@@ -1,21 +1,28 @@
 # Gitsual
 
+![logo](docs/logo.png)
+
+## A graphical user interface for git
+
+---
+
 ## Usage
+This output files would be generated in the `dist` folder
 ```bash
-yarn start-dev
+yarn dev
 ```
 
+
 ## Packaging
-We use [Electron builder](https://www.electron.build/) to build and package the application. By default you can run the following to package for your current platform:
+The installer would be in the `releases` folder.
 
 ```bash
 yarn dist
 ```
 
-This will create a installer for your platform in the `releases` folder.
 
-You can make builds for specific platforms (or multiple platforms) by using the options found [here](https://www.electron.build/cli). E.g. building for all platforms (Windows, Mac, Linux):
+This would generate an installer for `m`ac, `w`indows and `l`inux
 
 ```bash
-yarn dist -- -mwl
+yarn dist mwl
 ```
