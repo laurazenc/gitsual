@@ -16,6 +16,9 @@ const Button = styled.div<ButtonProps>`
     justify-content: ${props => props.justify || 'center'};
     align-items: ${props => props.align || 'center'};
     margin: ${props => props.margin || '0'};
+    &:hover {
+      cursor: pointer;
+    }
 
     ${props =>
 		props.border &&

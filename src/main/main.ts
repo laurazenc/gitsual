@@ -11,7 +11,7 @@ const installExtensions = async () => {
 
 	return Promise.all(
 		extensions.map(name => installer.default(installer[name], forceDownload))
-	).catch(console.log) // tslint:disable-line
+	).catch(console.log) // eslint-disable-line
 }
 
 const createWindow = async () => {
@@ -23,11 +23,14 @@ const createWindow = async () => {
 	win = new BrowserWindow({
 		show: false,
 		width: 1024,
-		height: 800
+		height: 800,
+		webPreferences: {
+			nodeIntegration: true
+		}
 	})
 
 	if (process.env.NODE_ENV !== 'production') {
-		process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1'
+		process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1' // eslint-disable-line
 		win.loadURL(`http://localhost:2003`)
 	} else {
 		win.loadURL(

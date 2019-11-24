@@ -18,8 +18,7 @@ const Logo = ({ color, height = '72', width = '148' }: LogoProps) => (
 				y1="1.00631" 
 				x2="131.263" 
 				y2="84.7461" 
-				gradientUnits="userSpaceOnUse"
-			>
+				gradientUnits="userSpaceOnUse">
 				<stop stopColor="#F6D2B0" />
 				<stop offset="1" stopColor="#FF406F" />
 			</linearGradient>
