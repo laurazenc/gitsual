@@ -1,6 +1,3 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
-
 const path = require('path');
 
 module.exports = {
@@ -14,9 +11,9 @@ module.exports = {
         __filename: false
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js', '.json']
+        extensions: ['.tsx', '.ts', '.js', '.json']       
     },
-    devtool: 'source-map',
+    devtool: 'source-map',    
     plugins: [
        
     ]

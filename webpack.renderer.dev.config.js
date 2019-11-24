@@ -6,8 +6,11 @@ const baseConfig = require('./webpack.renderer.config');
 module.exports = merge.smart(baseConfig, {
     resolve: {
         alias: {
-            'react-dom': '@hot-loader/react-dom'
+            'react-dom': '@hot-loader/react-dom'            
         }
+    },
+    externals: {
+        nodegit: 'commonjs nodegit'
     },
     plugins: [
         new HtmlWebpackPlugin(),

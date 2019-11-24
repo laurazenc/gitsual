@@ -14,6 +14,10 @@ module.exports = merge.smart(baseConfig, {
     module: {
         rules: [
             {
+                test: /\.node$/,
+                loader: "native-ext-loader"               
+            },
+            {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
