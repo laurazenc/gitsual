@@ -4,13 +4,13 @@ interface Action {
 
 const logger = (store: any) => (next: any) => (action: Action) => {
 	if (typeof action !== 'function') {
-	/* tslint:disable */
-		console.group(action.type)
-		console.info('dispatching', action)
+	
+		console.group(action.type) // eslint-disable-line
+		console.info('dispatching', action) // eslint-disable-line
 		const result = next(action)
-		console.log('next state', store.getState())
-		console.groupEnd()
-	/* tslint:enable */
+		console.log('next state', store.getState()) // eslint-disable-line
+		console.groupEnd() // eslint-disable-line
+	
 		return result
 	} 
 		return next(action)
