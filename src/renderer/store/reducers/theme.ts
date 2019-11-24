@@ -1,7 +1,7 @@
-import ThemeManager, { Theme } from '../../../bin/ThemeManager'
 import { Reducer } from 'redux'
-import types from '../actions'
+import ThemeManager, { Theme } from '../../../bin/ThemeManager'
 import { defaultTheme } from '../../../shared/theme'
+import types from '../actions'
 
 import { ThemeActionTypes } from '../actions/theme'
 

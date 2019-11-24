@@ -1,14 +1,16 @@
 {
-    "extends": [        
+    "extends": [   
+        "tslint:recommended",
         "tslint-react",
         "tslint-config-prettier"
     ],
     "jsRules": {},
     "rules": {
         "max-line-length": [
-            true,
+            false,
             {
-                "limit": 120
+                "limit": 100,
+                "ignore-pattern": "^import |^export {(.*?)}"
             }
         ],
         
@@ -21,13 +23,6 @@
             "singleline": "never",
             "multiline": "never"
         }],
-        "ter-indent": [
-            true,
-            4,
-            {
-                "SwitchCase": 1
-            }
-        ],
         "variable-name": false,
         "jsx-alignment": true,
         "jsx-equals-spacing": [true, "never"],
@@ -48,7 +43,12 @@
         ],
         "member-ordering": [
             false
-        ]
+        ],
+        "interface-name": false,
+        "object-literal-sort-keys": false,
+        "no-console": {
+            "severity": "warning"
+        }
     },
     "rulesDirectory": [
         "tslint-plugin-prettier"

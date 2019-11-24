@@ -1,9 +1,9 @@
-import Logo, { LogoType } from './Logo'
-import Folder, { FolderType } from './Folder'
-import Laptop, { LaptopType } from './Laptop'
-import File, { FileType } from './File'
 import Cog, { CogType } from './Cog'
+import File, { FileType } from './File'
+import Folder, { FolderType } from './Folder'
 import Heart, { HeartType } from './Heart'
+import Laptop, { LaptopType } from './Laptop'
+import Logo, { LogoType } from './Logo'
 
 interface IconProps {
 	color?: string

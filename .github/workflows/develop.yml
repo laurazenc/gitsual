@@ -1,0 +1,17 @@
+name: workflow
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-16.04        
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Install dependencies
+        run: yarn install
+      - name: Lint
+        run: yarn lint
+      - name: Test
+        run: yarn test

@@ -12,8 +12,8 @@
     "dev": "cross-env START_HOT=1 yarn renderer-dev",
     "prestart": "yarn build",
     "start": "electron .",
-    "lint": "tslint '{src,test,mocks}/**/*.{ts,tsx}' --project ./tsconfig.json",
-    "test": "jest '(\\/test\\/(?!e2e/)).*'",
+    "lint": "tslint --project ./tsconfig.json",
+    "test": "jest",
     "pretest:e2e": "npm run build",
     "test:e2e": "jest '(\\/test\\/e2e/).*'",
     "pack": "npm run build && electron-builder --dir",
@@ -24,7 +24,7 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(/test/.+\\.spec)\\.tsx?$",
+    "testRegex": "(/tests/.+\\.spec)\\.tsx?$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -47,7 +47,7 @@
       "buildResources": "resources",
       "output": "release"
     },
-    "files": [      
+    "files": [
       "src/index.html",
       "dist/index.html",
       "dist/",
@@ -83,6 +83,8 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@hot-loader/react-dom": "^16.8.6",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
     "@types/electron-devtools-installer": "^2.2.0",
     "@types/jest": "^24.0.13",
     "@types/react": "^16.8.18",

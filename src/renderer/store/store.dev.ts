@@ -1,7 +1,7 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
+import { routerActions, routerMiddleware } from 'connected-react-router'
 import { createHashHistory } from 'history'
-import { routerMiddleware, routerActions } from 'connected-react-router'
+import { applyMiddleware, compose, createStore } from 'redux'
+import thunk from 'redux-thunk'
 import loggerMiddleware from './logger-middleware'
 
 import createRootReducer from './reducers'

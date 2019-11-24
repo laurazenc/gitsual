@@ -1,6 +1,6 @@
 import { app, BrowserWindow } from 'electron'
-import url from 'url'
 import path from 'path'
+import url from 'url'
 
 let win: BrowserWindow | null
 
@@ -11,7 +11,7 @@ const installExtensions = async () => {
 
 	return Promise.all(
 		extensions.map(name => installer.default(installer[name], forceDownload))
-	).catch(console.log)
+	).catch(console.log) // tslint:disable-line
 }
 
 const createWindow = async () => {
@@ -53,8 +53,7 @@ const createWindow = async () => {
 
 
 
-	if (process.env.NODE_ENV !== 'production') {
-		// Open DevTools, see https://github.com/electron/electron/issues/12438 for why we wait for dom-ready
+	if (process.env.NODE_ENV !== 'production') {		
 		win.webContents.once('dom-ready', () => {
 			win!.webContents.openDevTools()
 		})

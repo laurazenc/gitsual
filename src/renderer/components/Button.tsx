@@ -1,4 +1,4 @@
-import styled, { StyledFunction, css } from 'styled-components'
+import styled, { css, StyledFunction } from 'styled-components'
 
 interface ButtonProps {
 	border?: boolean
