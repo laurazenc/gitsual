@@ -1,6 +1,6 @@
+import { BrowserWindowConstructorOptions } from 'electron'
 import { defaultTheme } from '../shared/theme'
 
-import { BrowserWindowConstructorOptions } from 'electron'
 
 export interface Theme {
 	theme: string
@@ -11,8 +11,11 @@ export interface Theme {
 
 class ThemeManager {
 	public theme: string
+
 	public colors: object
+
 	public fonts: object
+
 	public window: BrowserWindowConstructorOptions | {}
 
 	constructor(theme?: string) {
