@@ -18,8 +18,8 @@
     "test:e2e": "jest '(\\/test\\/e2e/).*'",
     "pack": "npm run build && electron-builder --dir",
     "dist": "npm run build && electron-builder",
-    "builder": "electron-builder install-app-deps",
-    "postinstall": "electron-rebuild -f -b --target=3.1.9 --arch=x64"
+    "builder": "electron-rebuild -f -b --target=3.1.9 --arch=x64",
+    "postinstall": "electron-builder install-app-deps"
   },
   "jest": {
     "transform": {
