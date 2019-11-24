@@ -1,24 +1,48 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { bindActionCreators, Dispatch  } from 'redux'
+import { Link } from 'react-router-dom';
 import { Theme } from '../../bin/ThemeManager'
+
 import { Button, Flex, Icon, Text } from '../components'
+
+import { Project } from '../store/reducers/projects'
+
+import { openProject, loadProjects } from '../store/actions/projects'
+
 
 const FlexContainer = styled(Flex)`
 	height: 100%;
 `
 
+const Path = styled(Text)`
+	text-overflow: ellipsis;
+    overflow: hidden;
+`
 
 const Panel = styled.div``
 
-const Home = () => {		
-	return <FlexContainer justify="space-between" align="center" direction="column" padding="16px">
+interface HomeProps {
+	recentProjects: Project[],
+	actions: Record<string, any>
+}
+
+const Home = ({ recentProjects, actions }: HomeProps) => {	
+
+	const open = async () => {
+		await actions.openProject()
+		await actions.loadProjects()
+	}
+
+	return (
+<FlexContainer justify="space-between" align="center" direction="column" padding="16px">
 		<Flex direction="column" align="center" justify="center" maxWidth="700px" style={{height: '100%'}} >
 			<Icon name="logo" />
 			<Text size="21px" height="30px" margin="30px 0"> Welcome to gitsual </Text>
 			<Flex justify="space-between" margin="100px 0 0">
 				<Panel>
-					<Button border={true} radius="3px" justify="flex-start" margin="0 0 10px 0" padding="6px 12px">
+					<Button border={true} radius="3px" justify="flex-start" margin="0 0 10px 0" padding="6px 12px" onClick={() => open()}>
 						<Icon name="folder" color="accent" />
 						<Text size="16px" height="24px" margin="0 0 0 10px">Open existing repo</Text>
 					</Button>
@@ -31,17 +55,21 @@ const Home = () => {
 						<Text size="16px" height="24px" margin="0 0 0 10px">Start new repo</Text>
 					</Button>
 				</Panel>
+				{recentProjects.length > 0 && (
 				<Panel>
 					<Text size="20px" height="30px" margin="0 0 16px 0">Recent</Text>
-					<Flex>
-						<Text size="16px" height="24px" margin="0 12px 0 0" color="accent">gitsual</Text>
-						<Text size="16px" height="24px" color="light">C:/Users/wadus/gitsual</Text>
-					</Flex>
-					<Flex>
-						<Text size="16px" height="24px" margin="0 12px 0 0" color="accent">gitsual</Text>
-						<Text size="16px" height="24px" color="light">C:/Users/wadus/gitsual</Text>
-					</Flex>
+						{recentProjects.map((project, i) => {
+							return (
+								<Flex key={i} maxWidth="250px">
+									<Link to={`/repo/${project.name}`}>										
+										<Text size="16px" height="24px" margin="0 12px 0 0" color="accent">{project.name}</Text>
+									</Link>
+									<Path size="16px" height="24px" color="light">{project.path}</Path>
+								</Flex>
+							)
+						})}					
 				</Panel>
+					) }
 				<Panel>
 					<Text size="20px" height="30px" margin="0 0 16px 0">Customize</Text>
 					<Flex align="center">
@@ -58,10 +86,16 @@ const Home = () => {
 			<Text size="12px" height="16px" color="accent">@laurazenc</Text>
 		</Flex>
 	</FlexContainer>
+)
 }
 
 const mapStateToProps = (state: any) => ({
-	theme: state.theme.theme
+	theme: state.theme.theme,
+	recentProjects: state.projects.projects
 })
 
-export default connect(mapStateToProps)(Home)
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+	actions: bindActionCreators({ openProject, loadProjects }, dispatch)
+})
+
+export default connect<any, any>(mapStateToProps, mapDispatchToProps)(Home)

@@ -14,7 +14,7 @@ const Icon = ({ name, ...rest }: IconProps) => {
 	const Svg = icons.default[name]
 	
 	if (!Svg) {
-		console.error(`${name} doesn't exist in the ICON namespace`) // tslint:disable-line
+		console.error(`${name} doesn't exist in the ICON namespace`) // eslint-disable-line
 		return null
 	}
 
