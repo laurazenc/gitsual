@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { Icon, Text, Button, Flex } from '../components'
 import styled from 'styled-components'
 import { Theme } from '../../bin/ThemeManager'
+import { Button, Flex, Icon, Text } from '../components'
 
 const FlexContainer = styled(Flex)`
 	height: 100%;
@@ -10,10 +10,6 @@ const FlexContainer = styled(Flex)`
 
 
 const Panel = styled.div``
-
-interface HomeProps {
-	theme: Theme
-}
 
 const Home = () => {		
 	return <FlexContainer justify="space-between" align="center" direction="column" padding="16px">

@@ -1,8 +1,8 @@
 import { Action } from 'redux'
-import ThemeManager, { Theme } from '../../../bin/ThemeManager'
-import types from './index'
 import { ThunkAction } from 'redux-thunk'
+import ThemeManager, { Theme } from '../../../bin/ThemeManager'
 import { AppState } from '../reducers'
+import types from './index'
 
 
 
