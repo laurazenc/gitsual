@@ -1,17 +1,20 @@
 import { connectRouter } from 'connected-react-router'
 import { combineReducers } from 'redux'
 
+import projectsReducer from './projects'
 import themeReducer from './theme'
 
 export interface RootState {
 	router: any,
-	theme: any
+	theme: any,
+	projects: any
 }
 
 const createRootReducer = (history: any) => {
 	return combineReducers<RootState | undefined>({
 		router: connectRouter(history),
-		theme: themeReducer
+		theme: themeReducer,
+		projects: projectsReducer
 	})
 }
 

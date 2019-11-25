@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import Routes from './Routes'
 
+import { loadProjects } from '../store/actions/projects'
 import { initTheme, ThemeActionTypes } from '../store/actions/theme'
 import { InitThemeReducer } from '../store/reducers/theme'
 
@@ -34,11 +35,13 @@ const Root = ({ store, history, actions, theme }: any) => {
 		async function init() {
 			await actions.initTheme()
 			setTheme(theme)
+			await actions.loadProjects()
 		}
 		init()
 	}, [])
 
-	return (<Provider store={store}>
+	return (
+<Provider store={store}>
 		<ThemeProvider theme={useTheme}>
 			<ConnectedRouter history={history}>
 				<>
@@ -47,7 +50,8 @@ const Root = ({ store, history, actions, theme }: any) => {
 				</>
 			</ConnectedRouter>
 		</ThemeProvider>
-	</Provider>)
+	</Provider>
+)
 }
 	
 
@@ -56,7 +60,7 @@ const Root = ({ store, history, actions, theme }: any) => {
 	})
 
 	const mapDispatchToProps = (dispatch: any) => ({
-		actions: bindActionCreators({ initTheme }, dispatch)
+		actions: bindActionCreators({ initTheme, loadProjects }, dispatch)
 	})
    
 	
