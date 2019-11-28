@@ -10,6 +10,9 @@ module.exports = merge.smart(baseConfig, {
     entry: {
         app: ['@babel/polyfill','./src/renderer/app.tsx']
     },
+    externals: {
+        nodegit: 'commonjs nodegit'
+    },
     module: {
         rules: [
             {

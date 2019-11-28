@@ -9,9 +9,6 @@ module.exports = merge.smart(baseConfig, {
             'react-dom': '@hot-loader/react-dom'            
         }
     },
-    externals: {
-        nodegit: 'commonjs nodegit'
-    },
     plugins: [
         new HtmlWebpackPlugin(),
     ],
