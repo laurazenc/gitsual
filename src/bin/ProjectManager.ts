@@ -3,7 +3,7 @@ import * as FileAsync from 'lowdb/adapters/FileAsync'
 import { DB_PATH } from '../utils/db'
 
 export interface Project {
-	db: lowDb.LowdbAsync<any>
+	db: lowDb.LowdbAsync<any>;
 }
 
 

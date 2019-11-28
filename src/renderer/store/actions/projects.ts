@@ -42,13 +42,12 @@ export const openProject = (): ThunkAction<void, AppState, null, Action<string>>
 			const projectName = fileName.split('/').reverse()[0]			
 			/* const repo = await Repository.open(filePath) */
 									
-			await pManager.db
-				.get('projects')
-				.push({
-					name: projectName,
-					path: filePath
-				})
-				.write()
+			const projects: any = pManager.db.get('projects')
+			projects.push({
+				name: projectName,
+				path: filePath
+			})
+			.write()
 
 			dispatch({ type: types.OPEN_PROJECT_SUCCESS })
 			
