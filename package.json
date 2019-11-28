@@ -13,9 +13,9 @@
     "prestart": "yarn build",
     "start": "electron .",
     "lint": "eslint --ext=jsx,js,tsx,ts,json src",
-    "test": "jest",
+    "test": "jest --testPathPattern='/tests/unit'",
     "pretest:e2e": "npm run build",
-    "test:e2e": "jest '(\\/test\\/e2e/).*'",
+    "test:e2e": "jest --testPathPattern='tests/e2e' --detectOpenHandles",
     "pack": "npm run build && electron-builder --dir",
     "dist": "npm run build && electron-builder",
     "builder": "electron-rebuild -f -b --target=3.1.9 --arch=x64",
@@ -25,7 +25,11 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(/tests/.+\\.spec)\\.tsx?$",
+     "globals": {
+    "ts-jest": {
+      "diagnostics": false
+      }
+    },
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -133,7 +137,7 @@
     "redux-devtools-extension": "^2.13.5",
     "sass-loader": "^7.1.0",
     "source-map-loader": "^0.2.4",
-    "spectron": "^5.0.0",
+    "spectron": "^9.0.0",
     "style-loader": "^0.23.1",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.5",
