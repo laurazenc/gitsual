@@ -1,5 +1,5 @@
-import * as lowDb from 'lowdb'
-import * as FileAsync from 'lowdb/adapters/FileAsync'
+import lowDb from 'lowdb'
+import FileAsync from 'lowdb/adapters/FileAsync'
 import { DB_PATH } from '../utils/db'
 
 export interface Project {
@@ -7,7 +7,7 @@ export interface Project {
 }
 
 class ProjectManager {
-    db: lowDb.LowdbAsync<any>
+    db: lowDb.LowdbAsync<any> | null
 
     constructor() {
         this.db = null

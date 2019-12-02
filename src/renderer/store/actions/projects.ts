@@ -50,7 +50,7 @@ export const openProject: ActionCreator<ThunkAction<void, Project[], null, Proje
             const projectName = fileName.split('/').reverse()[0]
             /* const repo = await Repository.open(filePath) */
 
-            const projects: any = pManager.db.get('projects')
+            const projects: any = pManager.db!.get('projects')
             projects
                 .push({
                     name: projectName,
@@ -85,7 +85,7 @@ export const loadProjects: ActionCreator<ThunkAction<void, Project[], null, Proj
 
             const result = await pManager.initDatabase()
 
-            const existingProjects = result.db.get('projects').value()
+            const existingProjects = result.db!.get('projects').value()
             const projects = [] as Project[]
 
             if (existingProjects && existingProjects.length > 0) {
