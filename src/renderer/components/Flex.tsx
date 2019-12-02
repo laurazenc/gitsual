@@ -5,14 +5,14 @@ export const JUSTIFY = ['flex-start', 'flex-end', 'center', 'space-between', 'sp
 export const ALIGN = ['flex-start', 'flex-end', 'center', 'stretch', 'baseline']
 
 interface FlexProps {
-	direction?: string
-	justify?: string
-	align?: string
-	margin?: string
-	padding?: string
-	background?: string
-  flex?: string
-  maxWidth?: string
+    direction?: string
+    justify?: string
+    align?: string
+    margin?: string
+    padding?: string
+    background?: string
+    flex?: string
+    maxWidth?: string
 }
 
 const Flex = styled.div<FlexProps>`
@@ -25,19 +25,18 @@ const Flex = styled.div<FlexProps>`
     flex: ${props => props.flex};
     background-color: ${props => props.background};
     width: 100%;
-    
 
     ${props =>
-		props.flex &&
-		css`
-       flex: ${props.flex};
-    `}
+        props.flex &&
+        css`
+            flex: ${props.flex};
+        `}
 
     ${props =>
-		props.maxWidth &&
-		css`
-      max-width: ${props.maxWidth};
-    `}
+        props.maxWidth &&
+        css`
+            max-width: ${props.maxWidth};
+        `}
 `
 
 export default Flex

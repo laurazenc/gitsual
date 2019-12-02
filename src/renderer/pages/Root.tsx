@@ -7,8 +7,9 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import Routes from './Routes'
 
 import { loadProjects } from '../store/actions/projects'
-import { initTheme, ThemeActionTypes } from '../store/actions/theme'
-import { InitThemeReducer } from '../store/reducers/theme'
+import { initTheme } from '../store/actions/theme'
+
+import { AppState } from '../store/reducers'
 
 const { useEffect, useState } = React
 
@@ -28,40 +29,37 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-
 const Root = ({ store, history, actions, theme }: any) => {
-	const [useTheme, setTheme] = useState(theme)
-	useEffect(() => {
-		async function init() {
-			await actions.initTheme()
-			setTheme(theme)
-			await actions.loadProjects()
-		}
-		init()
-	}, [])
+    const [useTheme, setTheme] = useState(theme)
+    useEffect(() => {
+        async function init() {
+            await actions.initTheme()
+            setTheme(theme)
+            await actions.loadProjects()
+        }
+        init()
+    }, [])
 
-	return (
-<Provider store={store}>
-		<ThemeProvider theme={useTheme}>
-			<ConnectedRouter history={history}>
-				<>
-					<GlobalStyle />
-					<Routes />
-				</>
-			</ConnectedRouter>
-		</ThemeProvider>
-	</Provider>
-)
+    return (
+        <Provider store={store}>
+            <ThemeProvider theme={useTheme}>
+                <ConnectedRouter history={history}>
+                    <>
+                        <GlobalStyle />
+                        <Routes />
+                    </>
+                </ConnectedRouter>
+            </ThemeProvider>
+        </Provider>
+    )
 }
-	
 
-	const mapStateToProps = (state: InitThemeReducer) => ({
-		theme: state.theme.theme
-	})
+const mapStateToProps = (state: AppState) => ({
+    theme: state.theme.theme,
+})
 
-	const mapDispatchToProps = (dispatch: any) => ({
-		actions: bindActionCreators({ initTheme, loadProjects }, dispatch)
-	})
-   
-	
+const mapDispatchToProps = (dispatch: any) => ({
+    actions: bindActionCreators({ initTheme, loadProjects }, dispatch),
+})
+
 export default hot(connect(mapStateToProps, mapDispatchToProps)(Root))

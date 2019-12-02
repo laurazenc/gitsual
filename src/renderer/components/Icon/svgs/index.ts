@@ -6,9 +6,9 @@ import Laptop, { LaptopType } from './Laptop'
 import Logo, { LogoType } from './Logo'
 
 interface IconProps {
-	color?: string
-	width?: string
-	height?: string
+    color?: string
+    width?: string
+    height?: string
 }
 
 export default { logo: Logo, folder: Folder, laptop: Laptop, file: File, cog: Cog, heart: Heart }

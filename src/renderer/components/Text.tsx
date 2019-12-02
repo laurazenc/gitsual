@@ -1,12 +1,12 @@
 import styled, { css, StyledFunction } from 'styled-components'
 
 interface TextProps {
-	font?: string
-	size?: string
-	height?: string
-	color?: string
-	margin?: string
-	padding?: string
+    font?: string
+    size?: string
+    height?: string
+    color?: string
+    margin?: string
+    padding?: string
 }
 
 const Text = styled.div<TextProps>`
@@ -17,10 +17,11 @@ const Text = styled.div<TextProps>`
     color: ${props => props.theme.colors[props.color || 'text']};
     padding: ${props => props.padding || '0'};
 
-    ${props => props.margin && css`
-        margin: ${props.margin};
-    `}
+    ${props =>
+        props.margin &&
+        css`
+            margin: ${props.margin};
+        `}
 `
-
 
 export default Text

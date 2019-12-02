@@ -9,7 +9,7 @@ const AppWrapper = styled.div`
 `
 
 const App = ({ children }: any) => {
-	return <AppWrapper>{children}</AppWrapper>
+    return <AppWrapper>{children}</AppWrapper>
 }
 
 export default App
