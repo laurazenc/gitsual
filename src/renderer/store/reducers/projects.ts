@@ -1,76 +1,69 @@
 import { Reducer } from 'redux'
 import types from '../actions'
 
-import { ProjectsActionTypes } from '../actions/projects'
+import { ProjectActions } from '../actions/projects'
 
 export interface Project {
-	name: string,
-	path: string
+    name: string
+    path: string
 }
 
-
-const initialState = {
-	projects: [],
-	isLoadingProjects: false,
-	error: null
-
+export interface ProjectState {
+    projects?: Project[]
+    isLoadingProjects: boolean
+    error?: string | null
 }
 
-export interface ProjectsReducer {
-	projects: Project[],
-	isLoadingProjects: boolean,
-	error: string | null
+export const initialState: ProjectState = {
+    projects: [],
+    isLoadingProjects: false,
+    error: null,
 }
 
+const projectsReducer: Reducer<ProjectState | any, ProjectActions> = (state = initialState, actions) => {
+    switch (actions.type) {
+        case types.LOAD_PROJECTS:
+            return {
+                ...initialState,
+                isLoadingProjects: true,
+            }
 
-const projectsReducer = (state = initialState, actions: ProjectsActionTypes) => {
-	switch (actions.type) {
-		case types.LOAD_PROJECTS:
-			return {
-				...initialState,				
-				isLoadingProjects: true
-			}
-			break
-		case types.LOAD_PROJECTS_SUCCESS:
-			return {
-				...initialState,
-				projects: actions.projects,
-				isLoadingProjects: false
-			}
-			break
-		case types.LOAD_PROJECTS_FAIL:
-			return {
-				...initialState,
-				isLoadingProjects: false,
-				error: actions.error
-			}
-			break
-		case types.OPEN_PROJECT:
-			return {
-				...state,			
-				isLoadingProjects: true
-			}
-			break
-		case types.OPEN_PROJECT_SUCCESS:
-			return {
-				...state,
-				isLoadingProjects: false
-			}
-			break
-		case types.OPEN_PROJECT_FAIL:
-			return {
-				...state,
-				isLoadingProjects: false,
-				error: actions.error
-			}
-			break
+        case types.LOAD_PROJECTS_SUCCESS:
+            return {
+                ...initialState,
+                projects: actions.projects,
+                isLoadingProjects: false,
+            }
 
-		default:
-			return state
-			break
-	}
+        case types.LOAD_PROJECTS_FAIL:
+            return {
+                ...initialState,
+                isLoadingProjects: false,
+                error: actions.error,
+            }
+
+        case types.OPEN_PROJECT:
+            return {
+                ...state,
+                isLoadingProjects: true,
+            }
+
+        case types.OPEN_PROJECT_SUCCESS:
+            return {
+                ...state,
+                isLoadingProjects: false,
+            }
+
+        case types.OPEN_PROJECT_FAIL:
+            return {
+                ...state,
+                isLoadingProjects: false,
+                error: actions.error,
+            }
+
+        default:
+            return state
+    }
 }
 
 export default projectsReducer
-
-export type ProjectsReducerTypes = ProjectsReducer

@@ -14,8 +14,8 @@ document.body.appendChild(mainElement)
 const root = document.getElementById('root')
 
 render(
-	<AppContainer>
-		<Root store={store} history={history} />
-	</AppContainer>,
-	process.env.NODE_ENV === 'development' ? mainElement :root
+    <AppContainer>
+        <Root store={store} history={history} />
+    </AppContainer>,
+    process.env.NODE_ENV === 'development' ? mainElement : root,
 )

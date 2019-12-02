@@ -1,24 +1,25 @@
-import { Action } from 'redux'
+import { Action, Dispatch, ActionCreator } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import ThemeManager, { Theme } from '../../../bin/ThemeManager'
 import { AppState } from '../reducers'
 import types from './index'
 
-
-
-interface InitThemeAction {
-	type: typeof types.INIT_THEME
-	theme: Theme
+interface ThemeAction {
+    type: string
+    theme: Theme
 }
 
+export type ThemeActions = ThemeAction
 
-export const initTheme = (): ThunkAction<void, AppState, null, Action<string>> => {
-	return async (dispatch) => {
-		const theme = new ThemeManager()		
-		await theme.load()
-		dispatch({ type: types.INIT_THEME, theme })
-	}
+export const initTheme: ActionCreator<ThunkAction<void, Theme, null, ThemeAction>> = () => {
+    return async (dispatch: Dispatch) => {
+        const theme = new ThemeManager()
+        await theme.load()
+
+        const initThemeAction: ThemeAction = {
+            type: types.INIT_THEME,
+            theme,
+        }
+        dispatch(initThemeAction)
+    }
 }
-
-export type ThemeActionTypes = InitThemeAction
-

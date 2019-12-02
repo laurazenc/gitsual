@@ -1,37 +1,35 @@
 import { BrowserWindowConstructorOptions } from 'electron'
 import { defaultTheme } from '../shared/theme'
 
-
 export interface Theme {
-	theme: string
-	colors: object
-	fonts: object
-	window: BrowserWindowConstructorOptions
+    theme?: string
+    colors: any
+    fonts: any
+    window: BrowserWindowConstructorOptions
 }
 
 class ThemeManager {
-	public theme: string
+    public theme: string
 
-	public colors: object
+    public colors: any
 
-	public fonts: object
+    public fonts: any
 
-	public window: BrowserWindowConstructorOptions | {}
+    public window: BrowserWindowConstructorOptions | {}
 
-	constructor(theme?: string) {
-		this.theme = theme || 'dark'
-		this.window = {}
-		this.colors = {}
-		this.fonts = {}
-	}
+    constructor(theme?: string) {
+        this.theme = theme || 'dark'
+        this.window = {}
+        this.colors = {}
+        this.fonts = {}
+    }
 
-	async load() {
-		this.window = defaultTheme.window
-		this.colors = defaultTheme.colors
-		this.fonts = defaultTheme.fonts
-		return this
-	}
-
+    async load() {
+        this.window = defaultTheme.window
+        this.colors = defaultTheme.colors
+        this.fonts = defaultTheme.fonts
+        return this
+    }
 }
 
 export default ThemeManager

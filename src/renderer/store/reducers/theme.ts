@@ -1,35 +1,29 @@
 import { Reducer } from 'redux'
-import ThemeManager, { Theme } from '../../../bin/ThemeManager'
+import { Theme } from '../../../bin/ThemeManager'
 import { defaultTheme } from '../../../shared/theme'
 import types from '../actions'
 
-import { ThemeActionTypes } from '../actions/theme'
+import { ThemeActions } from '../actions/theme'
 
-
-const initialState = {
-	theme: defaultTheme
+export interface ThemeState {
+    theme: Theme
 }
 
-export interface InitThemeReducer {
-	theme: Theme
+export const initialState: ThemeState = {
+    theme: defaultTheme,
 }
 
+const themeReducer: Reducer<ThemeState | any, ThemeActions> = (state = initialState, actions) => {
+    switch (actions.type) {
+        case types.INIT_THEME:
+            return {
+                ...state,
+                theme: actions.theme,
+            }
 
-const themeReducer = (state = initialState, actions: ThemeActionTypes) => {
-	switch (actions.type) {
-		case types.INIT_THEME:
-			return {
-				...state,
-				theme: actions.theme
-			}
-			break
-
-		default:
-			return state
-			break
-	}
+        default:
+            return state
+    }
 }
 
 export default themeReducer
-
-export type ThemeReducerTypes = InitThemeReducer
