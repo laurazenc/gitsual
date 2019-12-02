@@ -1,13 +1,13 @@
 import styled, { css, StyledFunction } from 'styled-components'
 
 interface ButtonProps {
-	border?: boolean
-	borderColor?: string
-	radius?: string
-	padding?: string
-	justify?: string
-	align?: string
-	margin?: string
+    border?: boolean
+    borderColor?: string
+    radius?: string
+    padding?: string
+    justify?: string
+    align?: string
+    margin?: string
 }
 
 const Button = styled.div<ButtonProps>`
@@ -17,18 +17,18 @@ const Button = styled.div<ButtonProps>`
     align-items: ${props => props.align || 'center'};
     margin: ${props => props.margin || '0'};
     &:hover {
-      cursor: pointer;
+        cursor: pointer;
     }
 
     ${props =>
-		props.border &&
-		css`
+        props.border &&
+        css`
             border: 1px solid ${props.theme.colors[props.borderColor || 'border']};
         `}
 
     ${props =>
-		props.radius &&
-		css`
+        props.radius &&
+        css`
             border-radius: ${props.radius};
         `}
 `

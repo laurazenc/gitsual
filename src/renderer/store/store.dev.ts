@@ -48,8 +48,9 @@ const configureStore = (initialState: any): Store<AppState> => {
     // Create Store
     const store = createStore(rootReducer, initialState, enhancer)
 
-    if (module.hot) {
-        module.hot.accept(
+    if ((module as any)['hot']) {
+        const h = (module as any)['hot']
+        h.accept(
             './reducers',
             // eslint-disable-next-line global-require
             () => store.replaceReducer(require('./reducers').default),

@@ -1,17 +1,15 @@
-const merge = require('webpack-merge');
-const spawn = require('child_process').spawn;
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const baseConfig = require('./webpack.renderer.config');
+const merge = require('webpack-merge')
+const spawn = require('child_process').spawn
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const baseConfig = require('./webpack.renderer.config')
 
 module.exports = merge.smart(baseConfig, {
     resolve: {
         alias: {
-            'react-dom': '@hot-loader/react-dom'            
-        }
+            'react-dom': '@hot-loader/react-dom',
+        },
     },
-    plugins: [
-        new HtmlWebpackPlugin(),
-    ],
+    plugins: [new HtmlWebpackPlugin()],
     devServer: {
         port: 2003,
         compress: true,
@@ -22,19 +20,19 @@ module.exports = merge.smart(baseConfig, {
         headers: { 'Access-Control-Allow-Origin': '*' },
         historyApiFallback: {
             verbose: true,
-            disableDotRule: false
+            disableDotRule: false,
         },
         before() {
             if (process.env.START_HOT) {
-                console.log('Starting main process');
+                console.log('Starting main process')
                 spawn('npm', ['run', 'start-main-dev'], {
                     shell: true,
                     env: process.env,
-                    stdio: 'inherit'
+                    stdio: 'inherit',
                 })
                     .on('close', code => process.exit(code))
-                    .on('error', spawnError => console.error(spawnError));
+                    .on('error', spawnError => console.error(spawnError))
             }
-        }
-    }
-});
+        },
+    },
+})
