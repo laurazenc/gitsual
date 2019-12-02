@@ -3,11 +3,11 @@
 exports[`Home screen should render 1`] = `
 <div>
   <div
-    class="sc-bxivhb sc-ifAKCX imbtep"
+    class="sc-bxivhb sc-ifAKCX hVKjLB"
     direction="column"
   >
     <div
-      class="sc-bxivhb laICkG"
+      class="sc-bxivhb jFLSFA"
       direction="column"
       style="height: 100%;"
     >
@@ -44,23 +44,23 @@ exports[`Home screen should render 1`] = `
         </defs>
       </svg>
       <div
-        class="sc-bwzfXH kgbZGv"
+        class="sc-bwzfXH crCCPa"
         height="30px"
       >
         Welcome to gitsual
       </div>
       <div
-        class="sc-bxivhb giXwxR"
+        class="sc-bxivhb eYnCW"
       >
         <div
           class="sc-bZQynM bOrPFB"
         >
           <div
-            class="sc-htpNat hskvBv"
+            class="sc-htpNat dhLikq"
             radius="3px"
           >
             <svg
-              class="sc-bdVaJa bsGxqI"
+              class="sc-bdVaJa huzVGd"
               color="accent"
               fill="none"
               height="16"
@@ -81,18 +81,18 @@ exports[`Home screen should render 1`] = `
               </g>
             </svg>
             <div
-              class="sc-bwzfXH kTelIH"
+              class="sc-bwzfXH fnaits"
               height="24px"
             >
               Open existing repo
             </div>
           </div>
           <div
-            class="sc-htpNat hskvBv"
+            class="sc-htpNat dhLikq"
             radius="3px"
           >
             <svg
-              class="sc-bdVaJa bsGxqI"
+              class="sc-bdVaJa huzVGd"
               color="accent"
               fill="none"
               height="16"
@@ -113,18 +113,18 @@ exports[`Home screen should render 1`] = `
               </g>
             </svg>
             <div
-              class="sc-bwzfXH kTelIH"
+              class="sc-bwzfXH fnaits"
               height="24px"
             >
               Clone repository
             </div>
           </div>
           <div
-            class="sc-htpNat hINGGm"
+            class="sc-htpNat kUOXSM"
             radius="3px"
           >
             <svg
-              class="sc-bdVaJa bsGxqI"
+              class="sc-bdVaJa huzVGd"
               color="accent"
               fill="none"
               height="16"
@@ -145,7 +145,7 @@ exports[`Home screen should render 1`] = `
               </g>
             </svg>
             <div
-              class="sc-bwzfXH kTelIH"
+              class="sc-bwzfXH fnaits"
               height="24px"
             >
               Start new repo
@@ -156,16 +156,16 @@ exports[`Home screen should render 1`] = `
           class="sc-bZQynM bOrPFB"
         >
           <div
-            class="sc-bwzfXH hrFHnF"
+            class="sc-bwzfXH SBoMB"
             height="30px"
           >
             Customize
           </div>
           <div
-            class="sc-bxivhb guWSHY"
+            class="sc-bxivhb bzyTmT"
           >
             <svg
-              class="sc-bdVaJa cdaeWZ"
+              class="sc-bdVaJa jWsai"
               fill="none"
               height="16"
               viewBox="0 0 16 16"
@@ -184,7 +184,7 @@ exports[`Home screen should render 1`] = `
               </g>
             </svg>
             <div
-              class="sc-bwzfXH hcvxjK"
+              class="sc-bwzfXH fmocfR"
               color="accent"
               height="24px"
             >
@@ -195,7 +195,7 @@ exports[`Home screen should render 1`] = `
       </div>
     </div>
     <div
-      class="sc-bxivhb hRJaMR"
+      class="sc-bxivhb dXvdhZ"
     >
       <div
         class="sc-bwzfXH jmlWCa"
@@ -205,7 +205,7 @@ exports[`Home screen should render 1`] = `
          
       </div>
       <svg
-        class="sc-bdVaJa fQqSoV"
+        class="sc-bdVaJa MfkVK"
         color="red"
         fill="none"
         height="16"
