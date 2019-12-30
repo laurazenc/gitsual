@@ -1,23 +1,41 @@
 import lowDb from 'lowdb'
-import FileAsync from 'lowdb/adapters/FileAsync'
+import FileSync from 'lowdb/adapters/FileSync'
+
 import { DB_PATH } from '../utils/db'
 
 export interface Project {
-    db: lowDb.LowdbAsync<any>
+    name: string
+    path: string
 }
 
 class ProjectManager {
-    db: lowDb.LowdbAsync<any> | null
+    db: lowDb.LowdbSync<any>
 
     constructor() {
-        this.db = null
+        const adapter = new FileSync(DB_PATH)
+        this.db = lowDb(adapter)
     }
 
     public async initDatabase() {
-        const adapter = new FileAsync(DB_PATH)
-        this.db = await lowDb(adapter)
-        await this.db.defaults({ projects: [] }).write()
+        await this.db.read()
         return this
+    }
+
+    public getProjectsDb() {
+        return this.db.get('projects')
+    }
+
+    public getProjects() {
+        return this.db.get('projects').value()
+    }
+    public getProject(name: string) {
+        return (
+            this.db
+                .get('projects')
+                // @ts-ignore
+                .find({ name })
+                .value()
+        )
     }
 }
 

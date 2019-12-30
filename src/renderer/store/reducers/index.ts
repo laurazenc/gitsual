@@ -3,11 +3,13 @@ import { combineReducers } from 'redux'
 
 import projectsReducer, { ProjectState } from './projects'
 import themeReducer, { ThemeState } from './theme'
+import repoReducer, { RepoState } from './repo'
 
 export interface AppState {
     projects: ProjectState
     router: RouterState
     theme: ThemeState
+    repo: RepoState
 }
 
 const createRootReducer = (history: any) => {
@@ -15,6 +17,7 @@ const createRootReducer = (history: any) => {
         router: connectRouter(history),
         projects: projectsReducer,
         theme: themeReducer,
+        repo: repoReducer,
     })
 }
 

@@ -13,6 +13,7 @@ interface FlexProps {
     background?: string
     flex?: string
     maxWidth?: string
+    width?: string
 }
 
 const Flex = styled.div<FlexProps>`
@@ -24,7 +25,8 @@ const Flex = styled.div<FlexProps>`
     margin: ${props => props.margin};
     flex: ${props => props.flex};
     background-color: ${props => props.background};
-    width: 100%;
+    width: ${props => props.width || '100%'};
+    box-sizing: border-box;
 
     ${props =>
         props.flex &&

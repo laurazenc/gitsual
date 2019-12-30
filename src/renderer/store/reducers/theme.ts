@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { Theme } from '../../../bin/ThemeManager'
+import ThemeManager, { Theme } from '../../../bin/ThemeManager'
 import { defaultTheme } from '../../../shared/theme'
 import types from '../actions'
 
@@ -10,7 +10,7 @@ export interface ThemeState {
 }
 
 export const initialState: ThemeState = {
-    theme: defaultTheme,
+    theme: new ThemeManager(defaultTheme),
 }
 
 const themeReducer: Reducer<ThemeState | any, ThemeActions> = (state = initialState, actions) => {
@@ -18,7 +18,6 @@ const themeReducer: Reducer<ThemeState | any, ThemeActions> = (state = initialSt
         case types.INIT_THEME:
             return {
                 ...state,
-                theme: actions.theme,
             }
 
         default:
