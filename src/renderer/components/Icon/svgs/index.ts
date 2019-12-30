@@ -1,9 +1,11 @@
-import Cog, { CogType } from './Cog'
-import File, { FileType } from './File'
-import Folder, { FolderType } from './Folder'
-import Heart, { HeartType } from './Heart'
-import Laptop, { LaptopType } from './Laptop'
-import Logo, { LogoType } from './Logo'
+import Cog from './Cog'
+import File from './File'
+import Folder from './Folder'
+import Heart from './Heart'
+import Laptop from './Laptop'
+import Logo from './Logo'
+import Remote from './Remote'
+import Clone from './Clone'
 
 interface IconProps {
     color?: string
@@ -11,5 +13,14 @@ interface IconProps {
     height?: string
 }
 
-export default { logo: Logo, folder: Folder, laptop: Laptop, file: File, cog: Cog, heart: Heart }
+export default {
+    logo: Logo,
+    folder: Folder,
+    laptop: Laptop,
+    file: File,
+    cog: Cog,
+    heart: Heart,
+    remote: Remote,
+    clone: Clone,
+}
 export type IconType = IconProps

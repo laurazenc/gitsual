@@ -14,7 +14,7 @@ import { AppState } from '../store/reducers'
 const { useEffect, useState } = React
 
 const GlobalStyle = createGlobalStyle`
-  @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,700");
+  @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700");
   
   html, body {
     margin: 0;
@@ -22,11 +22,44 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;    
   }
 
+  svg:not(:root) {
+      overflow: inherit;
+  }
+
+  a {
+      text-decoration: none;
+  }
 
 
   * {
     box-sizing: border-box;
   }
+  ul, li {
+    margin:0;
+    padding: 0;
+    text-indent: 0;
+    list-style-type: none;
+  }
+
+  *::-webkit-scrollbar  {
+    width: 5px;
+    height: 5px;
+    }
+    
+    *::-webkit-scrollbar-track {
+        border-radius: 5px;
+        
+    }
+
+    *::-webkit-scrollbar-corner       { display: none; }
+
+    
+    *::-webkit-scrollbar-thumb {
+        background-color: ${props => props.theme && props.theme.colors.zircon};
+        border-radius: 5px;
+    }
+
+
 `
 
 const Root = ({ store, history, actions, theme }: any) => {
@@ -45,7 +78,7 @@ const Root = ({ store, history, actions, theme }: any) => {
             <ThemeProvider theme={useTheme}>
                 <ConnectedRouter history={history}>
                     <>
-                        <GlobalStyle />
+                        <GlobalStyle theme={useTheme} />
                         <Routes />
                     </>
                 </ConnectedRouter>

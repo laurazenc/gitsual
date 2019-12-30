@@ -75,3 +75,5 @@ app.on('activate', () => {
         createWindow()
     }
 })
+
+app.allowRendererProcessReuse = false

@@ -6,19 +6,15 @@ import types from './index'
 
 interface ThemeAction {
     type: string
-    theme: Theme
+    theme?: Theme
 }
 
 export type ThemeActions = ThemeAction
 
 export const initTheme: ActionCreator<ThunkAction<void, Theme, null, ThemeAction>> = () => {
     return async (dispatch: Dispatch) => {
-        const theme = new ThemeManager()
-        await theme.load()
-
         const initThemeAction: ThemeAction = {
             type: types.INIT_THEME,
-            theme,
         }
         dispatch(initThemeAction)
     }
