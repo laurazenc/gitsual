@@ -2,7 +2,7 @@ import { Commit } from './commit'
 
 export { createGraphRows, RegularGraphRows as GraphRows }
 
-function createGraphRows<TNode>(commits: Array<Commit<TNode>>) {
+function createGraphRows(commits: Array<Commit>) {
     return new RegularGraphRows(commits)
 }
 
@@ -11,7 +11,7 @@ export class RegularGraphRows<TNode> {
 
     private maxRowCache: number | undefined = undefined
 
-    public constructor(commits: Array<Commit<TNode>>) {
+    public constructor(commits: Array<Commit>) {
         this.computeRowsFromCommits(commits)
     }
 
@@ -26,7 +26,7 @@ export class RegularGraphRows<TNode> {
         return this.maxRowCache
     }
 
-    protected computeRowsFromCommits(commits: Array<Commit<TNode>>): void {
+    protected computeRowsFromCommits(commits: Array<Commit>): void {
         commits.forEach((commit, i) => {
             this.rows.set(commit.hash, i)
         })

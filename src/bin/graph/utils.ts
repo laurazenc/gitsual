@@ -1,4 +1,4 @@
-export const pick = (obj: T, paths: K[]): Pick<T, K> => {
+export const pick = (obj: any, paths: any[]): Pick<any, any> => {
     return {
         ...paths.reduce((mem, key) => ({ ...mem, [key]: obj[key] }), {}),
     }

@@ -34,7 +34,7 @@ function LightenDarkenColor(hex: string, lum: number) {
     return rgb
 }
 
-const colors = {
+export const colors = {
     aquaMarine: '#56F3AA',
     brightSun: '#FED337',
     blueRibbon: '#0062FF',

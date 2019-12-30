@@ -37,8 +37,8 @@ export const EdgeType = {
     Merge: 'Merge',
 }
 
-export type Node = [number, number, NodeType]
-export type Edge = [[number, number], [number, number], EdgeType]
+export type Node = [number, number, string]
+export type Edge = [[number, number], [number, number], string]
 
 export class CommitGraph {
     positions: Map<string, Node>
@@ -79,7 +79,7 @@ export class CommitGraph {
         let i = 1
         const branches: (string | null)[] = ['index']
         const activeNodes = new Map()
-        const activeNodesQueue = new FastPriorityQueue<[number, string]>((lhs, rhs) => lhs[0] < rhs[0])
+        const activeNodesQueue = new FastPriorityQueue<[any, string]>((lhs, rhs) => lhs[0] < rhs[0])
         activeNodes.set('index', new Set())
         if (headSha) {
             activeNodesQueue.add([repo.shaToIndex.get(headSha), 'index'])
@@ -88,12 +88,15 @@ export class CommitGraph {
             let j = -1
             const commitSha = commit.sha()
             const children = repo.children.get(commit.sha()) || []
+            // @ts-ignore
             const branchChildren = children.filter(childSha => repo.parents.get(childSha)[0] === commitSha)
+            // @ts-ignore
             const mergeChildren = children.filter(childSha => repo.parents.get(childSha)[0] !== commitSha)
             // Compute forbidden indices
             let highestChild: string | undefined
             let iMin = Infinity
             for (const childSha of mergeChildren) {
+                // @ts-ignore
                 const iChild = this.positions.get(childSha) ? this.positions.get(childSha)[0] : 0
                 if (iChild < iMin) {
                     iMin = i
@@ -110,6 +113,7 @@ export class CommitGraph {
             } else {
                 // The commit can only replace a child whose first parent is this commit
                 for (const childSha of branchChildren) {
+                    // @ts-ignore
                     const jChild = this.positions.get(childSha) ? this.positions.get(childSha)[1] : 0
                     if (!forbiddenIndices.has(jChild) && jChild < jCommitToReplace) {
                         commitToReplace = childSha
@@ -123,6 +127,7 @@ export class CommitGraph {
                 branches[j] = commitSha
             } else if (children.length > 0) {
                 const childSha = children[0]
+                // @ts-ignore
                 const jChild = this.positions.get(childSha) ? this.positions.get(childSha)[1] : 0
                 // Try to insert near a child
                 // We could try to insert near any child instead of arbitrarily chosing the first one
@@ -132,25 +137,31 @@ export class CommitGraph {
                 j = insertCommit(commitSha, 0, new Set())
             }
             // Remove useless active nodes
+            // @ts-ignore
             while (!activeNodesQueue.isEmpty() && activeNodesQueue.peek()[0] < i) {
+                // @ts-ignore
                 const sha = activeNodesQueue.poll()[1]
                 activeNodes.delete(sha)
             }
             // Upddate the active nodes
+            // @ts-ignore
             const jToAdd = [j, ...branchChildren.map(childSha => this.positions.get(childSha)[1])]
             for (const activeNode of activeNodes.values()) {
                 jToAdd.forEach(j => activeNode.add(j))
             }
             activeNodes.set(commitSha, new Set())
+            // @ts-ignore
             const iRemove = Math.max(...repo.parents.get(commitSha).map(parentSha => repo.shaToIndex.get(parentSha)))
             activeNodesQueue.add([iRemove, commitSha])
             // Remove children from active branches
             for (const childSha of branchChildren) {
                 if (childSha != commitToReplace) {
+                    // @ts-ignore
                     branches[this.positions!.get(childSha)[1]] = null
                 }
             }
             // If the commit has no parent, remove it from active branches
+            // @ts-ignore
             if (repo.parents.get(commitSha).length === 0) {
                 branches[j] = null
             }

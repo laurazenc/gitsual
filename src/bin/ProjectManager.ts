@@ -29,10 +29,13 @@ class ProjectManager {
         return this.db.get('projects').value()
     }
     public getProject(name: string) {
-        return this.db
-            .get('projects')
-            .find({ name })
-            .value()
+        return (
+            this.db
+                .get('projects')
+                // @ts-ignore
+                .find({ name })
+                .value()
+        )
     }
 }
 

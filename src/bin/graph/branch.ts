@@ -3,8 +3,8 @@ import { GraphBuilder } from '../GraphBuilder'
 
 interface BranchOptions {
     name: string
-    color: string
-    gitgraph: GraphBuilder<TNode>
+    color?: string
+    gitgraph: GraphBuilder
     parentCommitHash?: Commit['hash']
     onGraphUpdate: () => void
 }
@@ -13,10 +13,10 @@ export const DELETED_BRANCH_NAME = ''
 
 export class Branch {
     name: BranchOptions['name']
-    private gitgraph: GraphBuilder<TNode>
-    color: string
+    gitgraph: GraphBuilder
+    color?: string
 
-    parentCommitHash: BranchOptions['parentCommitHash']
+    parentCommitHash?: BranchOptions['parentCommitHash']
     private onGraphUpdate: () => void
 
     constructor(options: BranchOptions) {
@@ -35,7 +35,7 @@ export class Branch {
     }
 }
 
-export const createDeletedBranch = (gitgraph: GraphBuilder<TNode>, onGraphUpdate: () => void): Branch => {
+export const createDeletedBranch = (gitgraph: GraphBuilder, onGraphUpdate: () => void): Branch => {
     return new Branch({
         name: DELETED_BRANCH_NAME,
         gitgraph,

@@ -38,7 +38,7 @@ const More = styled.div`
 `
 
 interface BranchHolderProps {
-    branches: Set<string, any>
+    branches: any
 }
 
 const BranchHolder = ({ branches }: BranchHolderProps) => {

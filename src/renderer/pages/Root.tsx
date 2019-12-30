@@ -8,6 +8,7 @@ import Routes from './Routes'
 
 import { loadProjects } from '../store/actions/projects'
 import { initTheme } from '../store/actions/theme'
+import { colors } from '../../shared/theme'
 
 import { AppState } from '../store/reducers'
 
@@ -55,7 +56,7 @@ const GlobalStyle = createGlobalStyle`
 
     
     *::-webkit-scrollbar-thumb {
-        background-color: ${props => props.theme && props.theme.colors.zircon};
+        background-color: ${colors.zircon};
         border-radius: 5px;
     }
 

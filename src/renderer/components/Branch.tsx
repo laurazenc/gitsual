@@ -42,7 +42,13 @@ const IconHolder = styled.div`
     }
 `
 
-const Branch = ({ color, branchName, info }) => {
+interface BranchProps {
+    color: string
+    branchName: string
+    info: any
+}
+
+const Branch: React.SFC<BranchProps> = ({ color, branchName, info }) => {
     return (
         <Tag>
             <Wrapper color={color}>

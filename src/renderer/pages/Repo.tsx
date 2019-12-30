@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import { loadRepo } from '../store/actions/repo'
 
 import { Flex, Text, CommitList, Icon } from '../components'
-import RepoBuilder, { Repository } from 'src/bin/RepoBuilder'
+import { Repository } from 'src/bin/RepoBuilder'
 
 import { Theme } from 'src/bin/ThemeManager'
 
@@ -28,7 +28,6 @@ export const OFFSET_X = 2 * RADIUS
 export const OFFSET_Y = 40
 const LINE_WIDTH = 3
 const INNER_RADIUS = RADIUS - LINE_WIDTH / 2
-const DASH_LENGTH = (2 * Math.PI * INNER_RADIUS) / 24
 
 interface RepoProps {
     match: RouteComponentProps<any>
@@ -242,7 +241,7 @@ const Repo: React.FC<RepoProps> = ({ match, loadRepo, repo, isLoading, theme }) 
 
         // Draw the edge between the index and the head commit
         if (repo.headCommit) {
-            let [x0, y0] = computeNodeCenterCoordinates(0, 0)
+            let [x0, y0] = computeNodeCenterCoordinates(0, 0) // eslint-disable-line
             y0 += RADIUS
             const node = commitGraph.positions.get(repo.headCommit.sha())!
             if (!node) {
@@ -319,7 +318,7 @@ const Repo: React.FC<RepoProps> = ({ match, loadRepo, repo, isLoading, theme }) 
                         height={`${repository.commits.length * OFFSET_Y + 30}px`}
                         width={`${repository.graph.commitgraph.width * (RADIUS * 2)}px`}
                     >
-                        <svg ref={graphRef}>
+                        <svg>
                             {drawIndexNode()}
                             {drawIndexEdge()}
                             {drawEdges()}

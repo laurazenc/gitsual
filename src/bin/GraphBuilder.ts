@@ -68,7 +68,7 @@ export class GraphBuilder {
     public refs = new Refs()
     public tags = new Refs()
 
-    private listeners: Array<(data: RenderedData<TNode>) => void> = []
+    private listeners: Array<(data: RenderedData<any>) => void> = []
 
     private nextTimeoutId: number | null = null
 
@@ -109,11 +109,11 @@ export class GraphBuilder {
      * @param branchesOrder Computed order of branches
      * @param branchName Name of the branch
      */
-    private getBranchDefaultColor(branchesOrder: BranchesOrder<TNode>, branchName: Branch['name']): string {
+    private getBranchDefaultColor(branchesOrder: BranchesOrder, branchName: Branch['name']): string {
         return branchesOrder.getColorOf(branchName)
     }
 
-    withBranches(branches: Map<Commit['hash'], Set<Branch['name']>>, commit: Commit<TNode>): Commit<TNode> {
+    withBranches(branches: Map<Commit['hash'], Set<Branch['name']>>, commit: Commit): Commit {
         let commitBranches = Array.from((branches.get(commit.hash) || new Set()).values())
 
         if (commitBranches.length === 0) {
@@ -154,6 +154,7 @@ export class GraphBuilder {
             const branch = new Branch({
                 name,
                 gitgraph: this,
+                // @ts-ignore
                 parentCommitHash: this.repo.parents.get(ref.target().tostrS())[0] as string,
                 onGraphUpdate: () => this.next(),
                 color: this.theme.getRandomColor,
@@ -165,11 +166,7 @@ export class GraphBuilder {
 
         const rows = createGraphRows(this.commits)
 
-        const branchesOrder = new BranchesOrder<TNode>(
-            commitsWithBranches,
-            this.theme.colors,
-            this.branchesOrderFunction,
-        )
+        const branchesOrder = new BranchesOrder(commitsWithBranches, this.theme.colors, this.branchesOrderFunction)
 
         console.log('branchesOrder', branchesOrder)
 
@@ -196,7 +193,7 @@ export class GraphBuilder {
 
         for (const ref of this.repo.references) {
             const [branch] = ref
-            if (branch !== this.repo.head.name()) branches.push(ref)
+            if (branch !== this.repo.head!.name()) branches.push(ref)
         }
 
         branches.forEach(branch => {
@@ -208,7 +205,7 @@ export class GraphBuilder {
 
             while (queue.length > 0) {
                 const currentHash = queue.pop() as Commit['hash']
-                const current = this.commits.find(({ hash }) => hash === currentHash) as Commit<TNode>
+                const current = this.commits.find(({ hash }) => hash === currentHash) as Commit
                 const prevBranches = result.get(currentHash) || new Set<Branch['name']>()
                 prevBranches.add(branchName)
                 result.set(currentHash, prevBranches)
@@ -257,15 +254,12 @@ export class GraphBuilder {
 
         // Use setTimeout() with `0` to debounce call to next tick.
         this.nextTimeoutId = window.setTimeout(() => {
+            // @ts-ignore
             this.listeners.forEach(listener => listener(this.computePositions()))
         }, 0)
     }
 
-    private withPosition(
-        rows: GraphRows<TNode>,
-        branchesOrder: BranchesOrder<TNode>,
-        commit: Commit<TNode>,
-    ): Commit<TNode> {
+    private withPosition(rows: GraphRows<any>, branchesOrder: BranchesOrder, commit: Commit): Commit {
         const row = rows.getRowOf(commit.hash)
         const maxRow = rows.getMaxRow()
 

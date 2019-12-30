@@ -59,7 +59,7 @@ class RepoBuilder {
     headCommit: Git.Commit | null
     unstagedPatches: Git.ConvenientPatch[]
     stagedPatches: Git.ConvenientPatch[]
-    graph: GraphBuilder | null
+    graph: GraphBuilder | any | null
     currentBranch: Git.Reference | null
     theme: Theme
 
@@ -149,6 +149,7 @@ class RepoBuilder {
 
     async getReferences() {
         try {
+            // @ts-ignore
             const references = await this.repo.getReferences()
             return references.filter((reference: Git.Reference) => reference.name() !== 'refs/stash')
         } catch (e) {

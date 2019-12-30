@@ -1,7 +1,7 @@
 import { Branch } from './branch'
 import { Commit } from './commit'
 
-export { BranchesOrder, CompareBranchesOrder }
+export { BranchesOrder }
 
 type Color = string
 
@@ -13,17 +13,13 @@ type Color = string
  * - \> 0 if `branchNameA` should render after `branchNameB`
  * - = 0 if ordering of both branches shouldn't change
  */
-type CompareBranchesOrder = (branchNameA: Branch['name'], branchNameB: Branch['name']) => number
+export type CompareBranchesOrder = (branchNameA: Branch['name'], branchNameB: Branch['name']) => number
 
-class BranchesOrder<TNode> {
+class BranchesOrder {
     private branches: Set<Branch['name']> = new Set()
     private colors: Color[]
 
-    public constructor(
-        commits: Array<Commit<TNode>>,
-        colors: Color[],
-        compareFunction: CompareBranchesOrder | undefined,
-    ) {
+    public constructor(commits: Array<Commit>, colors: Color[], compareFunction: CompareBranchesOrder | undefined) {
         this.colors = colors
         commits.forEach(commit => this.branches.add(commit.branchToDisplay))
 

@@ -1,19 +1,21 @@
 import { Branch } from './branch'
 import { Refs } from './refs'
 
+import Git from 'nodegit'
+
 export enum CommitType {
     Commit = 'commit',
     Stash = 'stash',
     Merge = 'merge',
 }
 
-interface CommitRenderOptions<TNode> {
-    renderDot?: (commit: Commit) => TNode
-    renderMessage?: (commit: Commit) => TNode
-    renderTooltip?: (commit: Commit) => TNode
+interface CommitRenderOptions {
+    renderDot?: (commit: Commit) => any
+    renderMessage?: (commit: Commit) => any
+    renderTooltip?: (commit: Commit) => any
 }
 
-interface CommitOptions<TNode> extends CommitRenderOptions<TNode> {
+interface CommitOptions extends CommitRenderOptions {
     author: Committer
     subject: string
     body?: string
@@ -43,7 +45,7 @@ export class Commit {
     public parents: Array<Commit['hash']>
 
     public parentsAbbrev: Array<Commit['hashAbbrev']>
-    date: CommitOptions<TNode>['date']
+    date: CommitOptions['date']
 
     author: Committer
     type: CommitType
@@ -76,7 +78,7 @@ export class Commit {
 
     //tags: Tag[] = []
 
-    constructor(options: CommitOptions<TNode>) {
+    constructor(options: CommitOptions) {
         this.author = options.author
         this.committer = options.committer
 
@@ -99,25 +101,25 @@ export class Commit {
     }
 
     public isBranch(): boolean {
-        return this.branches.length > 0
+        return this.branches!.length > 0
     }
 
-    public setTags(
-        tags: Refs,
-        getTagStyle: (name: Tag<TNode>['name']) => Partial<TagStyle>,
-        getTagRender: (name: Tag<TNode>['name']) => GitgraphTagOptions<TNode>['render'],
-    ): this {
-        this.tags = tags
-            .getNames(this.hash)
-            .map(name => new Tag(name, getTagStyle(name), getTagRender(name), this.style))
-        return this
-    }
+    // public setTags(
+    //     tags: Refs,
+    //     getTagStyle: (name: Git.Tag['name']) => Partial<TagStyle>,
+    //     getTagRender: (name: Git.Tag['name']) => GitgraphTagOptions['render'],
+    // ): this {
+    //     this.tags = tags
+    //         .getNames(this.hash)
+    //         .map(name => new Tag(name, getTagStyle(name), getTagRender(name), this.style))
+    //     return this
+    // }
 
     public isMerged(): boolean {
         return !this.isBranch() && this.parents.length > 1
     }
 
-    public withDefaultColor(color: string): Commit<TNode> {
+    public withDefaultColor(color: string): Commit {
         const commit = this.cloneCommit()
 
         return commit
